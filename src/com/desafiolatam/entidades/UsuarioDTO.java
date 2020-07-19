@@ -3,17 +3,17 @@ package com.desafiolatam.entidades;
 public class UsuarioDTO {
 	private int idUsuario;
 	private String nombre;
-	private String contraseña;
+	private String pass;
 	
 	
 	
 	public UsuarioDTO() {
 	}
 
-	public UsuarioDTO(int idUsuario, String nombre, String contrasena) {
+	public UsuarioDTO(int idUsuario, String nombre, String pass) {
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
-		this.contraseña = contrasena;
+		this.pass = pass;
 	}
 
 	public int getIdUsuario() {
@@ -28,11 +28,11 @@ public class UsuarioDTO {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getPass() {
+		return pass;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 	
 	

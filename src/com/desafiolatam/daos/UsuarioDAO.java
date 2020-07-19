@@ -12,10 +12,10 @@ import com.desafiolatam.interfaces.CrudDao;
 import com.desafiolatam.singleton.Singleton;
 
 public class UsuarioDAO implements CrudDao {
-	private final String SQL_SELECT_ALL="SELECT id_usuario, nombre, contraseña FROM usuarios ";
-	private final String SQL_SELECT_ID = "SELECT id_usuario, nombre, contraseña FROM usuarios WHERE id_usuario = ?";
-	private final String SQL_INSERT = 	"INSERT INTO usuarios ( nombre, contraseña) VALUES (?,?)";
-	private final String SQL_UPDATE = "UPDATE usuarios SET nombre = ?, contraseña=? WHERE id_usuario = ?";
+	private final String SQL_SELECT_ALL="SELECT id_usuario, nombre, contraseï¿½a FROM usuarios ";
+	private final String SQL_SELECT_ID = "SELECT id_usuario, nombre, contraseï¿½a FROM usuarios WHERE id_usuario = ?";
+	private final String SQL_INSERT = 	"INSERT INTO usuarios ( nombre, contraseï¿½a) VALUES (?,?)";
+	private final String SQL_UPDATE = "UPDATE usuarios SET nombre = ?, contraseï¿½a=? WHERE id_usuario = ?";
 	private final String SQL_DELETE = "DELETE FROM usuarios WHERE id_usuario = ?";
 	/**
 	 * Metodo encargado de obtener todos los usuarios disponibles
@@ -36,7 +36,7 @@ public class UsuarioDAO implements CrudDao {
 				UsuarioDTO usuarioDTO = new UsuarioDTO();
 				usuarioDTO.setIdUsuario(resultado.getInt("id_usuario"));
 				usuarioDTO.setNombre(resultado.getString("nombre"));
-				usuarioDTO.setContraseña(resultado.getString("contraseña"));
+				usuarioDTO.setPass(resultado.getString("contraseÃ±a"));
 				lstUsuario.add(usuarioDTO);
 			}
 		}catch(Exception ex) {
@@ -52,7 +52,7 @@ public class UsuarioDAO implements CrudDao {
 			Connection conn = Singleton.getConnection();
 			PreparedStatement ps = conn.prepareStatement(SQL_INSERT);
 			ps.setString(1, usuarioDTO.getNombre());
-			ps.setString(2, usuarioDTO.getContraseña());
+			ps.setString(2, usuarioDTO.getPass());
 			if(ps.execute()) {
 				return true;
 			}
@@ -66,7 +66,7 @@ public class UsuarioDAO implements CrudDao {
 
 	@Override
 	public Object selectById(Object obj) {
-		//creamos objeto que devolverá el usuario
+		//creamos objeto que devolverï¿½ el usuario
 		UsuarioDTO usuarioDTO = (UsuarioDTO) obj;
 		//conexion a la base de datos y ejecucion de la sentencia
 		Connection conexion = Singleton.getConnection();
@@ -78,7 +78,7 @@ public class UsuarioDAO implements CrudDao {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {//Traspasa los valores de la consulta al objeto a retornar
 				usuarioDTO.setNombre(rs.getString("descripcion"));
-				usuarioDTO.setContraseña(rs.getString("contraseña"));
+				usuarioDTO.setPass(rs.getString("contraseÃ±a"));
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -90,12 +90,12 @@ public class UsuarioDAO implements CrudDao {
 	public boolean update(Object obj) {
 		UsuarioDTO usuarioDTO = (UsuarioDTO) obj;
 		try {
-			//Obtiene la conexión a la base de datos
+			//Obtiene la conexiï¿½n a la base de datos
 			Connection conn = Singleton.getConnection();
 			//Prepara la consulta
 			PreparedStatement ps = conn.prepareStatement(SQL_UPDATE);
 			ps.setString(1, usuarioDTO.getNombre());
-			ps.setString(2, usuarioDTO.getContraseña());
+			ps.setString(2, usuarioDTO.getPass());
 			if(ps.execute()) {
 				return true;
 			}

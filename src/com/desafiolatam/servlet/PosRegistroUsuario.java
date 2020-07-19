@@ -19,10 +19,10 @@ public class PosRegistroUsuario extends HttpServlet {
  
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  String nombre = request.getParameter("nombre");
-	  String contraseña = request.getParameter("password");
+	  String pass = request.getParameter("password");
 	  UsuarioDTO dto = new UsuarioDTO();
 	  dto.setNombre(nombre);
-	  dto.setContraseña(contraseña);
+	  dto.setPass(pass);
 	  Facade facade = new Facade();
 	  try {
 		facade.crearUsuario(dto);
