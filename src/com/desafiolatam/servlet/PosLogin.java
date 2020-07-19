@@ -18,19 +18,19 @@ import com.desafiolatam.facade.Facade;
 public class PosLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final int LOGIN_EXITOSO = 1;
-	public static final int LOGIN_ERROR_CONTRASEÑA = 2;
+	public static final int LOGIN_ERROR_PASS = 2;
 	public static final int LOGIN_USUARIO_NO_EXISTE = 3;
        
  		@Override
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {
 			String nombre = request.getParameter("nombreUsuario");
-			String contraseña = request.getParameter("password");
+			String pass = request.getParameter("password");
 			UsuarioDTO dto = new UsuarioDTO();
 			UsuarioDTO dtoRet = new UsuarioDTO();
 			HttpSession session1 = request.getSession();
 			dto.setNombre(nombre);
-			dto.setContraseña(contraseña);
+			dto.setPass(pass);
 			Facade facade = new Facade();
 			try {
 				dtoRet=facade.consultaUsuario(dto);
@@ -38,11 +38,11 @@ public class PosLogin extends HttpServlet {
 				e.printStackTrace();
 			}
 			if (dtoRet.getIdUsuario()==dto.getIdUsuario()) {
-				if(dtoRet.getContraseña()==dto.getContraseña()) {
+				if(dtoRet.getPass()==dto.getPass()) {
 					session1.setAttribute("Usuario", nombre);
 					session1.setAttribute("msjLogin", LOGIN_EXITOSO);
 				} else {
-					session1.setAttribute("msjLogin", LOGIN_ERROR_CONTRASEÑA);
+					session1.setAttribute("msjLogin", LOGIN_ERROR_PASS);
 				}
 			}else {
 				session1.setAttribute("msjLogin", LOGIN_USUARIO_NO_EXISTE);
